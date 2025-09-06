@@ -6,14 +6,16 @@ class Program
         {
         Random randomGenerator = new Random();
 
-        //int MagicNumber = randomGenerator.Next(1, 88);
+        int MagicNumber = randomGenerator.Next(1, 100);
 
-        int guess = Console.ReadLine();
+        int userGuess = 0;
+        int guessCount = 0;
 
-        while (guess != MagicNumber)
+
+        while (userGuess != MagicNumber)
        {
            Console.WriteLine("What is the magic number? ");
-           guess = int.Parse(Console.ReadLine());
+           userGuess = int.Parse(Console.ReadLine());
            if (MagicNumber > guess)
            {
                Console.WriteLine("Higher");
@@ -24,7 +26,7 @@ class Program
            }
            else
            {
-              Console.WriteLine("You guessed it!");
+              Console.WriteLine("Yes! You have guessed the number.");
            }
 
         } 
