@@ -26,7 +26,7 @@ class Program
            }
            else
            {
-              Console.WriteLine("Yes! You have guessed the number.");
+            Console.WriteLine("Yes! You have guessed the number.");
            }
 
         } 
