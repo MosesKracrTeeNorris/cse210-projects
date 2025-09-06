@@ -1,36 +1,57 @@
 using System;
 
-class Program
+class MagicNumberGame
 {
-   static void Main(string[] args)
-        {
-        Random randomGenerator = new Random();
+    static void Main(string[] args)
+    {
+        // Create a Random object to generate random numbers.
+        Random random = new Random();
 
-        int MagicNumber = randomGenerator.Next(1, 100);
+        // Generate a random magic number between 1 and 100 (inclusive).
+        int magicNumber = random.Next(1, 101); 
 
         int userGuess = 0;
         int guessCount = 0;
 
+        Console.WriteLine("Welcome to the Magic Number Guessing Game!");
+        Console.WriteLine("I have chosen a number between 1 and 100. Try to guess it!");
 
-        while (userGuess != MagicNumber)
-       {
-           Console.WriteLine("What is the magic number? ");
-           userGuess = int.Parse(Console.ReadLine());
-           if (MagicNumber > guess)
-           {
-               Console.WriteLine("Higher");
-           }
-           else if (MagicNumber < guess)
-           {
-                Console.WriteLine("Lower");
-           }
-           else
-           {
-            Console.WriteLine("Yes! You have guessed the number.");
-           }
+        // Loop until the user guesses the magic number.
+        while (userGuess != magicNumber)
+        {
+            Console.Write("What is the magic number?");
+            string input = Console.ReadLine();
 
-        } 
+            // Attempt to parse the user's input to an integer.
+            if (int.TryParse(input, out userGuess))
+            {
+                guessCount++; // Increment the guess counter for each valid attempt.
+
+                if (userGuess < magicNumber)
+                {
+                    Console.WriteLine("Too low! The magic number is higher.");
+                }
+                else if (userGuess > magicNumber)
+                {
+                    Console.WriteLine("Too high! The magic number is lower.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        Console.WriteLine($"Congratulations! You guessed the magic number ({magicNumber}) in {guessCount} guesses.");
+        Console.WriteLine("Do you want to continue playing the game? (Yes/No):");
+        string playAgainInput = Console.ReadLine().ToLower();
+        playAgain = (playAgainInput == "Yes");
+        {
+            while (playAgain);
+            {
+                Console.WriteLine("Thank you very much for playing!");
+            }
+        }
+        
     }
-
-
 }
