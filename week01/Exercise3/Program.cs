@@ -6,19 +6,19 @@ class Program
         {
         Random randomGenerator = new Random();
 
-        int magicNumber = randomGenerator.Next(1, 101);
+        //int MagicNumber = randomGenerator.Next(1, 88);
 
-        int guess = -1;
+        int guess = Console.ReadLine();
 
-        while (guess != magicNumber)
+        while (guess != MagicNumber)
        {
-           Console.WriteLine("What is your guess number? ");
+           Console.WriteLine("What is the magic number? ");
            guess = int.Parse(Console.ReadLine());
-           if (magicNumber > guess)
+           if (MagicNumber > guess)
            {
                Console.WriteLine("Higher");
            }
-           else if (magicNumber < guess)
+           else if (MagicNumber < guess)
            {
                 Console.WriteLine("Lower");
            }
