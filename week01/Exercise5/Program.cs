@@ -4,8 +4,11 @@ class program
    static void Main(string[] args)
    {
     DisplayWelcomeMessage();
+    console.WriteLine("Welcome to the program");
 
     string userName = PromptUserName();
+    Console.WriteLine("Please enter your name:")
+    string userName = console.ReadLine();
     int squaredNumber = squaredNumber(userNumber);
     DisplayResult(userName, squareNumber);
 
