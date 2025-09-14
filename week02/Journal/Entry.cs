@@ -1,5 +1,3 @@
-using system;
-
 public class Entry
 
 {

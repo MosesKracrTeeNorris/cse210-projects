@@ -1,4 +1,4 @@
-public class person
+public class Person
 {
     public string _firstName;
     public string _lastName;
