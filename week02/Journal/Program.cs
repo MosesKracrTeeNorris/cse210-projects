@@ -35,7 +35,8 @@ public class JournalProgram
     public static void Main(string[] args)
     {
         List<JournalEntry> journalEntries = new List<JournalEntry>();
-        string filename = "journal_entries.csv";
+
+        string filename = "myJournal.csv";
 
         Console.WriteLine("Welcome to your Digital Journal!");
 

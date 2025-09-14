@@ -1,9 +1,20 @@
 public class Journal
 {
-    public List<Entry> _entries = new List<Entry>();
+    public List<Entry> _entries;
+    public void AddEntry(Entry newEntry)
+    {
 
-    public void Journal.AddEntry();
-    public void DisplayAll();
-    public void SaveToFile();
-    public void LoadFromFile();
+    }
+    public void DisplayAll()
+    {
+
+    }
+    public void SaveToFile(string file)
+    {
+
+    }
+    public void LoadFromFile(string file)
+    {
+        
+    }
 }
