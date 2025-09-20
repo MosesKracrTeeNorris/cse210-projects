@@ -4,11 +4,11 @@ using System.IO;
 
 public class JournalEntry
 {
-    private static string filename = Console.ReadLine();
-    private static List<string> _journalEntries = new List<string>();
-    private static Random _random = new Random();
+    public string filename = Console.ReadLine();
+    public static List<string> _journalEntries = new List<string>();
+    public static Random _random = new Random();
 
-    private static string[] _prompts = new string[]
+    public static string[] _prompts = new string[]
     {
         "What was the most interesting thing that happened today?",
         "What are you grateful for right now?",
@@ -24,7 +24,7 @@ public class JournalEntry
         Console.WriteLine("Welcome to the journal program!");
     }
 
-    private static void RunMenu()
+    public static void RunMenu()
     {
         bool running = true;
         while (running)
@@ -44,7 +44,7 @@ public class JournalEntry
                     WriteNewEntry();
                     break;
                 case "2":
-                    ViewAllEntries();
+                    DisplayAllEntries();
                     break;
                 case "3":
                     LoadJournalFromFile();
@@ -62,7 +62,7 @@ public class JournalEntry
         }
     }
 
-    private static void WriteNewEntry()
+    public static void WriteNewEntry()
     {
         string prompt = _prompts[_random.Next(_prompts.Length)];
         Console.WriteLine($"\nPrompt: {prompt}");
@@ -72,7 +72,7 @@ public class JournalEntry
         Console.WriteLine("Entry added successfully!");
     }
 
-    private static void DisplayAllEntries()
+    public static void DisplayAllEntries()
     {
         if (_journalEntries.Count == 0)
         {
@@ -87,13 +87,13 @@ public class JournalEntry
         }
     }
 
-    private static void LoadJournalFromFile()
+    public static void LoadJournalFromFile()
     {
         if (File.Exists(filename))
         {
             try
             {
-                _journalEntries.Clear(); // Clear current entries before loading
+                _journalEntries.Console.ReadLine();
                 string[] lines = File.ReadAllLines(filename);
                 _journalEntries.AddRange(lines);
                 Console.WriteLine($"\nJournal loaded from {filename} successfully.");
@@ -109,7 +109,10 @@ public class JournalEntry
         }
     }
 
-    private static void SaveJournalToFile()
+    public static void SaveJournalToFile()
+        {
+            public string filename = Console.ReadLine();
+        }
     {
         try
         {
