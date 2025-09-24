@@ -4,7 +4,7 @@ using System.IO;
 
 public class JournalEntry
 {
-    public string filename = Console.ReadLine();
+    public static string filename = Console.ReadLine();
     public static List<string> _journalEntries = new List<string>();
     public static Random _random = new Random();
 
