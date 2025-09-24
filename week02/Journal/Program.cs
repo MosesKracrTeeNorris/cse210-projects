@@ -1,131 +1,138 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-
-public class JournalEntry
-{
-    public DateTime Date { get; set; }
-    public string Prompt { get; set; }
-    public string Content { get; set; }
-    public string display { get; set; }
-    public string Load { get; set; }
-    public string Save { get; set; }
-}
 
 public class JournalProgram
 {
     private static List<string> prompts = new List<string>
     {
-        "How did I see the hand of the Lord in my life today?",
-        "How did I resolve some challenges at the job site today?",
-        "What I have learned from my scripture studies today?",
-        "List some of your favorite quotes from the Book of Mormon:",
-        "Who is your favorite speaker for today's conference?",
-        "What did you learn today from the general conference?",
-        "What made you smile today?",
-        "What challenge did you overcome today?",
+        "What was the most interesting thing that happened today?",
         "What are you grateful for right now?",
-        "Describe a moment of peace you experienced today.",
+        "Describe a challenge you faced today and how you handled it.",
         "What is one thing you learned today?",
-        "If you could change one thing about today, what would it be?",
-        "What is a goal you have for tomorrow?",
-        "What emotions did you feel today and why?",
-        "Describe a conversation that impacted you today.",
-        "What is a small act of kindness you witnessed or performed today?"
+        "If you could change one thing about today, what would it be?"
     };
 
     public static void Main(string[] args)
     {
-        List<JournalEntry> journalEntries = new List<JournalEntry>();
-
-        string filename = Console.ReadLine();
-
-        Console.WriteLine("Welcome to the Digital Journal Program!");
-
         while (true)
         {
-            Console.WriteLine("\nPlease select one of the following choices:");
-            Console.WriteLine("1. Write");
-            Console.WriteLine("2. Display");
-            Console.WriteLine("3. Load");
-            Console.WriteLine("4. Save");
-            Console.WriteLine("5. Quit");
-
-            Console.WriteLine("\nWhat would you like to do?");
-
+            DisplayMenu();
             string choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
-                    JournalEntry newEntry = CreateNewEntry();
-                    journalEntries.Add(newEntry);
+                    WriteNewEntry();
                     break;
                 case "2":
-                    JournalEntry DisplayAll();
+                    DisplayEntries();
                     break;
                 case "3":
-                    JournalEntry LoadFromFile(string file);
+                    SaveJournalToFile();
                     break;
                 case "4":
-                    SaveEntriesToCsv(journalEntries, filename);
-                    Console.WriteLine("Journal entry saved successfully!");
+                    LoadJournalFromFile();
                     break;
-                //case "2":
-                    //Console.WriteLine("Viewing entries is not yet implemented. Please check back later!");
-                    //break;
                 case "5":
-                    Console.WriteLine("Quitting journal. Goodbye!");
+                    Console.WriteLine("Exiting journal program. Goodbye!");
                     return;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
             }
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 
-    private static JournalEntry CreateNewEntry()
+    private static void DisplayMenu()
     {
-        JournalEntry entry = new JournalEntry();
-        entry.Date = DateTime.Now;
+        Console.WriteLine("Journal Program Menu:");
+        Console.WriteLine("1. Write a new entry");
+        Console.WriteLine("2. Display all entries");
+        Console.WriteLine("3. Save journal to file");
+        Console.WriteLine("4. Load journal from file");
+        Console.WriteLine("5. Quit");
+        Console.Write("Enter your choice: ");
+    }
 
+    private static void WriteNewEntry()
+    {
         Random rand = new Random();
-        entry.Prompt = prompts[rand.Next(prompts.Count)];
+        string randomPrompt = prompts[rand.Next(prompts.Count)];
 
-        Console.WriteLine($"\nJournal Prompt: {entry.Prompt}");
-       // Console.WriteLine("Write your entry below (press Enter twice to finish):");
+        Console.WriteLine($"\nPrompt: {randomPrompt}");
+        Console.Write("Your entry: ");
+        string entryContent = Console.ReadLine();
 
-        string content = "";
-        string line;
-        while (!string.IsNullOrWhiteSpace(line = Console.ReadLine()))
-        {
-            content += line + Environment.NewLine;
-        }
-        entry.Content = content.Trim(); // Remove trailing newline if any
+        string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        string fullEntry = $"Date/Time: {timestamp}\nPrompt: {randomPrompt}\nEntry: {entryContent}\n";
 
-        return entry;
+        Console.WriteLine("\nYour entry has been recorded:");
+        Console.WriteLine(fullEntry);
+
+        
     }
 
-    private static void SaveEntriesToCsv(List<JournalEntry> entries, string filename)
+    private static void DisplayEntries()
     {
-        // Check if the file exists and if it's empty to write headers
-        bool fileExists = File.Exists(filename);
-        bool writeHeader = !fileExists || new FileInfo(filename).Length == 0;
+        Console.WriteLine("\nDisplaying all entries (Not implemented in this basic example for in-memory storage).");
+        Console.WriteLine("To see saved entries, load from a file after saving.");
+    }
 
-        using (StreamWriter writer = new StreamWriter(filename, append: true)) // Append to existing file
+    private static void SaveJournalToFile()
+    {
+        Console.Write("Enter filename to save");
+        string filename = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(filename))
         {
-            if (writeHeader)
-            {
-                writer.WriteLine("Date,Prompt,Content");
-            }
+            Console.WriteLine("Filename cannot be empty.");
+            return;
+        }
 
-            foreach (var entry in entries)
+        else
+        {
+            
+            string filename = $"Date/Time: {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}\nPrompt: "{randomPrompt}"\nEntry: "{entryContent};
+            File.AppendAllText(filename, filename);
+            Console.WriteLine($"Journal saved to {filename}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving journal: {ex.Message}");
+        }
+    }
+
+    private static void LoadJournalFromFile()
+    {
+        Console.Write("Enter filename to load");
+        string filename = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(filename))
+        {
+            Console.WriteLine("Filename cannot be empty.");
+            return;
+        }
+
+        try
+        {
+            if (File.Exists(filename))
             {
-                // Escape commas and newlines in content to prevent CSV parsing issues
-                string escapedContent = $"\"{entry.Content.Replace("\"", "\"\"").Replace(Environment.NewLine, "\\n")}\"";
-                writer.WriteLine($"{entry.Date:yyyy-MM-dd HH:mm:ss},\"{entry.Prompt}\",{escapedContent}");
+                string content = File.ReadAllText(filename);
+                Console.WriteLine($"\nJournal loaded from {filename}:\n");
+                Console.WriteLine(content);
             }
+            else
+            {
+                Console.WriteLine("File not found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading journal: {ex.Message}");
         }
     }
 }
