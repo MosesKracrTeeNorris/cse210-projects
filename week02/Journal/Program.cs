@@ -1,33 +1,49 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 public class JournalEntry
 {
-    public static string filename = Console.ReadLine();
-    public static List<string> _journalEntries = new List<string>();
-    public static Random _random = new Random();
+    public DateTime Date { get; set; }
+    public string Prompt { get; set; }
+    public string Content { get; set; }
+    public string display { get; set; }
+    public string Load { get; set; }
+    public string Save { get; set; }
+}
 
-    public static string[] _prompts = new string[]
+public class JournalProgram
+{
+    private static List<string> prompts = new List<string>
     {
-        "What was the most interesting thing that happened today?",
+        "How did I see the hand of the Lord in my life today?",
+        "How did I resolve some challenges at the job site today?",
+        "What I have learned from my scripture studies today?",
+        "List some of your favorite quotes from the Book of Mormon:",
+        "Who is your favorite speaker for today's conference?",
+        "What did you learn today from the general conference?",
+        "What made you smile today?",
+        "What challenge did you overcome today?",
         "What are you grateful for right now?",
-        "Describe a challenge you faced and how you overcame it.",
-        "What is a goal you are working towards?",
-        "If you could give advice to your past self, what would it be?"
+        "Describe a moment of peace you experienced today.",
+        "What is one thing you learned today?",
+        "If you could change one thing about today, what would it be?",
+        "What is a goal you have for tomorrow?",
+        "What emotions did you feel today and why?",
+        "Describe a conversation that impacted you today.",
+        "What is a small act of kindness you witnessed or performed today?"
     };
 
     public static void Main(string[] args)
     {
-        LoadJournalFromFile(); // Load existing entries on startup
-        RunMenu();
-        Console.WriteLine("Welcome to the journal program!");
-    }
+        List<JournalEntry> journalEntries = new List<JournalEntry>();
 
-    public static void RunMenu()
-    {
-        bool running = true;
-        while (running)
+        string filename = Console.ReadLine();
+
+        Console.WriteLine("Welcome to the Digital Journal Program!");
+
+        while (true)
         {
             Console.WriteLine("\nPlease select one of the following choices:");
             Console.WriteLine("1. Write");
@@ -35,26 +51,33 @@ public class JournalEntry
             Console.WriteLine("3. Load");
             Console.WriteLine("4. Save");
             Console.WriteLine("5. Quit");
-            Console.Write("What would you like to do?");
+
+            Console.WriteLine("\nWhat would you like to do?");
 
             string choice = Console.ReadLine();
+
             switch (choice)
             {
                 case "1":
-                    WriteNewEntry();
+                    JournalEntry newEntry = CreateNewEntry();
+                    journalEntries.Add(newEntry);
                     break;
                 case "2":
-                    DisplayAllEntries();
+                    JournalEntry DisplayAll();
                     break;
                 case "3":
-                    LoadJournalFromFile();
+                    JournalEntry LoadFromFile(string file);
                     break;
                 case "4":
-                    SaveJournalToFile();
+                    SaveEntriesToCsv(journalEntries, filename);
+                    Console.WriteLine("Journal entry saved successfully!");
                     break;
+                //case "2":
+                    //Console.WriteLine("Viewing entries is not yet implemented. Please check back later!");
+                    //break;
                 case "5":
-                    running = false;
-                    break;
+                    Console.WriteLine("Quitting journal. Goodbye!");
+                    return;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
@@ -62,66 +85,47 @@ public class JournalEntry
         }
     }
 
-    public static void WriteNewEntry()
+    private static JournalEntry CreateNewEntry()
     {
-        string prompt = _prompts[_random.Next(_prompts.Length)];
-        Console.WriteLine($"\nPrompt: {prompt}");
-        Console.Write("Your entry: ");
-        string entry = Console.ReadLine();
-        _journalEntries.Add($"{DateTime.Now}: {entry}");
-        Console.WriteLine("Entry added successfully!");
+        JournalEntry entry = new JournalEntry();
+        entry.Date = DateTime.Now;
+
+        Random rand = new Random();
+        entry.Prompt = prompts[rand.Next(prompts.Count)];
+
+        Console.WriteLine($"\nJournal Prompt: {entry.Prompt}");
+       // Console.WriteLine("Write your entry below (press Enter twice to finish):");
+
+        string content = "";
+        string line;
+        while (!string.IsNullOrWhiteSpace(line = Console.ReadLine()))
+        {
+            content += line + Environment.NewLine;
+        }
+        entry.Content = content.Trim(); // Remove trailing newline if any
+
+        return entry;
     }
 
-    public static void DisplayAllEntries()
+    private static void SaveEntriesToCsv(List<JournalEntry> entries, string filename)
     {
-        if (_journalEntries.Count == 0)
-        {
-            Console.WriteLine("\nNo entries to display.");
-            return;
-        }
+        // Check if the file exists and if it's empty to write headers
+        bool fileExists = File.Exists(filename);
+        bool writeHeader = !fileExists || new FileInfo(filename).Length == 0;
 
-        Console.WriteLine("\n--- Your Journal Entries ---");
-        foreach (string entry in _journalEntries)
+        using (StreamWriter writer = new StreamWriter(filename, append: true)) // Append to existing file
         {
-            Console.WriteLine(entry);
-        }
-    }
-
-    public static void LoadJournalFromFile()
-    {
-        if (File.Exists(filename))
-        {
-            try
+            if (writeHeader)
             {
-                _journalEntries.Console.ReadLine();
-                string[] lines = File.ReadAllLines(filename);
-                _journalEntries.AddRange(lines);
-                Console.WriteLine($"\nJournal loaded from {filename} successfully.");
+                writer.WriteLine("Date,Prompt,Content");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error loading journal: {ex.Message}");
-            }
-        }
-        else
-        {
-            Console.WriteLine($"\nJournal file {filename} not found. Starting with an empty journal.");
-        }
-    }
 
-    public static void SaveJournalToFile()
-        {
-            public string filename = Console.ReadLine();
-        }
-    {
-        try
-        {
-            File.WriteAllLines(filename, _journalEntries);
-            Console.WriteLine($"\nJournal saved to {filename} successfully.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error saving journal: {ex.Message}");
+            foreach (var entry in entries)
+            {
+                // Escape commas and newlines in content to prevent CSV parsing issues
+                string escapedContent = $"\"{entry.Content.Replace("\"", "\"\"").Replace(Environment.NewLine, "\\n")}\"";
+                writer.WriteLine($"{entry.Date:yyyy-MM-dd HH:mm:ss},\"{entry.Prompt}\",{escapedContent}");
+            }
         }
     }
 }
