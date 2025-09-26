@@ -1,27 +1,23 @@
-using System;
-
-namespace OnlineOrderingSystem
+class Address
 {
-    public class Address
-    {
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string PostalCode { get; set; }
-        public string Country { get; set; }
+    private string _street;
+    private string _city;
+    private string _state;
+    private string _country;
 
-        public Address(string street, string city, string state, string postalCode, string country)
-        {
-            Street = street;
-            City = city;
-            State = state;
-            PostalCode = postalCode;
-            Country = country;
-        }
-
-        public override string ToString()
-        {
-            return $"{Street}, {City}, {State} {PostalCode}, {Country}";
-        }
-    }
+public Address(string street, string city, string state, string country)
+{
+    _street = street;
+    _city = city;
+    _state = state;
+    _country = country;
+}
+ public bool IsInUSA()
+ {
+    return _country.ToUpper() == "USA";
+ }
+ public string GetFullAddress()
+ {
+    return $"{_street}\n{_city}, {_state}\n{_country}";
+ }
 }

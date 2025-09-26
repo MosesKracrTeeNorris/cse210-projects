@@ -1,43 +1,49 @@
 using System;
 using System.Collections.Generic;
 
-namespace OnlineOrderingSystem
+class Order
 {
-    public class Order
+    private List<Product> _products;
+    private Customer _customer;
+
+    public Order(Customer customer)
     {
-        public int OrderId { get; set; }
-        public int CustomerId { get; set; }
-        public DateTime OrderDate { get; set; }
-        public List<Product> Products { get; private set; }
-        public decimal TotalAmount { get; private set; }
-        public string Status { get; set; } // e.g., "Pending", "Shipped", "Delivered"
+        _customer = customer;
+        _products = new List<Product>();
+    }
 
-        public Order(int orderId, int customerId)
+    public void AddProduct(Product product)
+    {
+        _products.Add(product);
+    }
+
+    // NEW METHOD: Display full order neatly
+    public void DisplayOrder()
+    {
+        Console.WriteLine("Packing Label:");
+        foreach (var product in _products)
         {
-            OrderId = orderId;
-            CustomerId = customerId;
-            OrderDate = DateTime.Now;
-            Products = new List<Product>();
-            TotalAmount = 0m;
-            Status = "Pending";
+            Console.WriteLine($"{product.GetName()} (ID: {product.GetProductId()})");
         }
 
-        public void AddProduct(Product product, int quantity)
+        Console.WriteLine();
+        Console.WriteLine("Shipping Label:");
+        Console.WriteLine(_customer.GetName());
+        Console.WriteLine(_customer.GetAddress().GetFullAddress());
+
+        double subtotal = 0;
+        foreach (var product in _products)
         {
-            for (int i = 0; i < quantity; i++)
-            {
-                Products.Add(product);
-            }
-            TotalAmount += product.Price * quantity;
+            double cost = product.GetTotalCost();
+            subtotal += cost;
+            Console.WriteLine($"{product.GetName()} - {product.GetProductId()} : ${cost}");
         }
 
-        public void CalculateTotal()
-        {
-            TotalAmount = 0m;
-            foreach (var product in Products)
-            {
-                TotalAmount += product.Price;
-            }
-        }
+        double shipping = _customer.LivesInUSA() ? 5 : 35;
+        double total = subtotal + shipping;
+
+        Console.WriteLine($"Subtotal: ${subtotal}");
+        Console.WriteLine($"Shipping: ${shipping}");
+        Console.WriteLine($"TOTAL:    ${total}");
     }
 }

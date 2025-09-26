@@ -1,30 +1,19 @@
-using System;
-using System.Collections.Generic;
-
-namespace OnlineOrderingSystem
+class Customer
 {
-    public class Customer
+    private string _name;
+    private Address _address;
+
+    public Customer(string name, Address address)
     {
-        public int CustomerId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public Address ShippingAddress { get; set; }
-        public List<Order> Orders { get; private set; }
-
-        public Customer(int customerId, string firstName, string lastName, string email, Address shippingAddress)
-        {
-            CustomerId = customerId;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            ShippingAddress = shippingAddress;
-            Orders = new List<Order>();
-        }
-
-        public void AddOrder(Order order)
-        {
-            Orders.Add(order);
-        }
+        _name = name;
+        _address = address;
     }
+
+    public bool LivesInUSA()
+    {
+        return _address.IsInUSA();
+    }
+   
+   public string GetName() => _name;
+   public Address GetAddress() => _address;
 }

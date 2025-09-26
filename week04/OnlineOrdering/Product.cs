@@ -1,39 +1,23 @@
-using System;
-
-namespace OnlineOrderingSystem
+class Product
 {
-    public class Product
+    private string _name;
+    private string _productId;
+    private double _price;
+    private int _quantity;
+
+    public Product(string name, string productId, double price, int quantity)
     {
-        public int ProductId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public int StockQuantity { get; set; }
-
-        public Product(int productId, string name, string description, decimal price, int stockQuantity)
-        {
-            ProductId = productId;
-            Name = name;
-            Description = description;
-            Price = price;
-            StockQuantity = stockQuantity;
-        }
-
-        public void DecreaseStock(int quantity)
-        {
-            if (StockQuantity >= quantity)
-            {
-                StockQuantity -= quantity;
-            }
-            else
-            {
-                throw new InvalidOperationException("Not enough stock available.");
-            }
-        }
-
-        public void IncreaseStock(int quantity)
-        {
-            StockQuantity += quantity;
-        }
+        _name = name;
+        _productId = productId;
+        _price = price;
+        _quantity = quantity;
     }
+
+    public double GetTotalCost()
+    {
+        return _price * _quantity;
+    }
+
+    public string GetName() => _name;
+    public string GetProductId() => _productId;
 }
