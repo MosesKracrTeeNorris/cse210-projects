@@ -1,33 +1,25 @@
-using System.Collections.Generic; // Required for using List
+using System;
+using System.Collections.Generic;
 
-public class Video
+ public class Video
 {
     private string _title;
     private string _author;
-    private int _lengthInSeconds;
+    private int _length; 
     private List<Comment> _comments;
 
-    public Video(string title, string author, int lengthInSeconds)
+    public Video(string title, string author, int length)
     {
         _title = title;
         _author = author;
-        _lengthInSeconds = lengthInSeconds;
-        _comments = new List<Comment>(); // Initialize the list of comments
+        _length = length;
+        _comments = new List<Comment>();
     }
 
-    // Method to add a comment to the video's list
-    public void AddComment(Comment newComment)
+    public void AddComment(Comment comment)
     {
-        _comments.Add(newComment);
+        _comments.Add(comment);
     }
-
-    // Method to get all comments
-    public List<Comment> GetComments()
-    {
-        return _comments;
-    }
-
-    // Method to get the number of comments
     public int GetNumberOfComments()
     {
         return _comments.Count;
