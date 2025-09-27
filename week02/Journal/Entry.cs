@@ -14,7 +14,7 @@ public class Entry
         Console.WriteLine($"Time: {_time}");
         Console.WriteLine($"Prompt: {_promptText}");
         Console.WriteLine($"Entry: {_entryText}");
-        Console.WriteLine($"Mood: {_mental}");
+        Console.WriteLine($"Mental: {_mental}");
             
     }
 }
