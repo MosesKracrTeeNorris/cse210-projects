@@ -1,10 +1,12 @@
+using System;
+
 public class Entry
 {
     public string _date;
     public string _promptText;
-    public string _entriesText;
-    public string _method; //Prompts user to save based on the method
-    public string _time; // Used to record date and time journal is saved.
+    public string _entryText;
+    public string _mental;
+    public string _time; 
 
     public void Display()
     {
@@ -12,6 +14,7 @@ public class Entry
         Console.WriteLine($"Time: {_time}");
         Console.WriteLine($"Prompt: {_promptText}");
         Console.WriteLine($"Entry: {_entryText}");
-        Console.WriteLine($"Method: {_method}");
+        Console.WriteLine($"Mood: {_mental}");
+            
     }
 }

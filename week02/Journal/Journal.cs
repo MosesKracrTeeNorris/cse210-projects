@@ -4,30 +4,34 @@ using System.IO;
 
 public class Journal
 {
-    public List<Entry> _entries;
+    public List<Entry> _entries = new List<Entry>();
+
     public void AddEntry(Entry newEntry)
     {
         _entries.Add(newEntry);
     }
+
     public void DisplayAll()
     {
         foreach (Entry entry in _entries)
         {
-           entry.Display();  
+            entry.Display();
         }
     }
+
     public void SaveToFile(string filename)
     {
-       using (StreamWriter outputFile = new StreamWriter(filename))
-       {
-        foreach (Entry entry in _entries)
+        using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            // Saving file as a CSV
-            outputFile.WriteLine($"{entry._date} & {entry._time} & {entry._promptText} & {entry._entryText} & {entry._method}");
-           }
-        }    
+            foreach (Entry entry in _entries)
+            {
+            
+                outputFile.WriteLine($"{entry._date}|{entry._time}|{entry._promptText}|{entry._entryText}|{entry._mental}");
+            }
+        }
     }
-    public void LoadFromFile(string file)
+
+    public void LoadFromFile(string filename)
     {
         _entries.Clear();
         string[] lines = File.ReadAllLines(filename);
@@ -40,9 +44,8 @@ public class Journal
             entry._time = parts[1];
             entry._promptText = parts[2];
             entry._entryText = parts[3];
-            entry._method = parts[4];
+            entry._mental = parts[4];
             _entries.Add(entry);
-  
+                }
+            }
         }
-    }
-}
