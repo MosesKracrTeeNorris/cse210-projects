@@ -17,7 +17,7 @@ class Order
         _products.Add(product);
     }
 
-    // NEW METHOD: Display full order neatly
+    //Displaying full order as needed
     public void DisplayOrder()
     {
         Console.WriteLine("Packing Label:");
