@@ -27,7 +27,7 @@ public abstract class Activity
         _duration = int.Parse(Console.ReadLine());
 
         Console.WriteLine("Prepare to begin...");
-        Thread.Sleep(6000); // Pause for 6 seconds
+        Thread.Sleep(7000); // Pause for 6 seconds
 
         PerformActivity();
 
@@ -43,7 +43,7 @@ public abstract class Activity
         _lastPerformed = DateTime.Now;
         _performCount++;
         Console.WriteLine("Returning to main menu...");
-        Thread.Sleep(3000);
+        Thread.Sleep(7000);
     }
 
     public void DisplayStatistics()

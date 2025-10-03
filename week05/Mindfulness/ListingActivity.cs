@@ -19,7 +19,7 @@ public class ListingActivity : Activity
         int itemCount = 0;
 
         Console.WriteLine("List as many responses as you can to the following prompt:");
-        Console.WriteLine($"--- {_prompts[rand.Next(_prompts.Length)]} ---");
+        Console.WriteLine($"{_prompts[rand.Next(_prompts.Length)]}");
         Console.WriteLine("You may begin in a few seconds...");
         Thread.Sleep(4000);
 

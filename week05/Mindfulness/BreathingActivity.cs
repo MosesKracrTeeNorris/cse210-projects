@@ -9,10 +9,10 @@ public class BreathingActivity : Activity
         while (elapsedSeconds < _duration)
         {
             Console.WriteLine("Breathe in...");
-            for (int i = 4; i > 0; i--)
+            for (int i = 4; i <= 300; i++)
             {
                 Console.Write(i + " ");
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
                 elapsedSeconds++;
                 if (elapsedSeconds >= _duration) break;
             }
@@ -22,7 +22,7 @@ public class BreathingActivity : Activity
             for (int i = 4; i > 0; i--)
             {
                 Console.Write(i + " ");
-                Thread.Sleep(1000);
+                Thread.Sleep(5000);
                 elapsedSeconds++;
                 if (elapsedSeconds >= _duration) break;
             }
