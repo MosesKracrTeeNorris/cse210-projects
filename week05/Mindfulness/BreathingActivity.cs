@@ -9,7 +9,7 @@ public class BreathingActivity : Activity
         while (elapsedSeconds < _duration)
         {
             Console.WriteLine("Breathe in...");
-            for (int i = 4; i <= 300; i++)
+            for (int i = 4; i > 100; i--)
             {
                 Console.Write(i + " ");
                 Thread.Sleep(5000);

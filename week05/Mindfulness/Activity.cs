@@ -9,7 +9,7 @@ public abstract class Activity
     protected int _duration; // in seconds
     protected DateTime _lastPerformed;
     protected int _performCount;
-    protected int _showSpinner;
+    
     public Activity(string name, string description)
     {
         _name = name;
@@ -26,7 +26,7 @@ public abstract class Activity
         Console.Write("How long, in second, would you like for your section?");
         _duration = int.Parse(Console.ReadLine());
 
-        Console.WriteLine($"Prepare to begin...{_showSpinner}");
+        Console.WriteLine($"Prepare to begin...");
         Thread.Sleep(7000); // Pause for 6 seconds
 
         PerformActivity();
