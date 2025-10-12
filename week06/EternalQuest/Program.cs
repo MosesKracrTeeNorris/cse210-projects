@@ -10,7 +10,7 @@ class Program
         Console.WriteLine("Track your goals, earn points, and stay motivated on your Eternal Quest.\n");
 
         GoalManager manager = new GoalManager();
-        manager.Start();
+        manager.Run();
     }
 }
 
