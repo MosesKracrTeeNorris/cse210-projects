@@ -78,7 +78,7 @@ class GoalManager
                 return;
         }
 
-        // ✅ Confirmation message
+        // Confirming message
         Console.WriteLine("\n--- Goal Added Successfully! ---\n");
     }
 
@@ -108,12 +108,12 @@ class GoalManager
             // Extra: Level system
             if (_score >= 1000)
             {
-                Console.WriteLine("🎉 Congratulations! You leveled up! 🎉");
+                Console.WriteLine("🗽☑️ Congratulations! You leveled up! ☑️🗽");
                 _score = 0; // reset or adjust as you like
             }
 
             // Extra: Encouraging message
-            string[] messages = { "Keep it up!", "You're doing great!", "Stay strong!", "One step closer!" };
+            string[] messages = { "Great! Keep it up the good wor." };
             Random rand = new Random();
             Console.WriteLine(messages[rand.Next(messages.Length)]);
         }
