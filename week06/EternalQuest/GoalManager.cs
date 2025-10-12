@@ -7,7 +7,7 @@ class GoalManager
     private List<Goal> _goals = new List<Goal>();
     private int _score = 0;
 
-    public void Run()
+    public void Start()
     {
         int choice = 0;
         while (choice != 6)
