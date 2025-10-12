@@ -11,13 +11,13 @@ class GoalFactory
             case "SimpleGoal":
                 return new SimpleGoal(data[0], data[1], int.Parse(data[2])) 
                 { 
-                    // Store completion status
+                    // Restore completion status
                 };
             case "EternalGoal":
                 return new EternalGoal(data[0], data[1], int.Parse(data[2]));
             case "ChecklistGoal":
-                ChecklistGoal chg = new ChecklistGoal(data[0], data[1], int.Parse(data[2]), int.Parse(data[4]), int.Parse(data[5]));
-                return chg;
+                ChecklistGoal cg = new ChecklistGoal(data[0], data[1], int.Parse(data[2]), int.Parse(data[4]), int.Parse(data[5]));
+                return cg;
             case "NegativeGoal":
                 return new NegativeGoal(data[0], data[1], int.Parse(data[2]));
             default:

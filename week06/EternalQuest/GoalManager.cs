@@ -6,7 +6,7 @@ class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
     private int _score = 0;
-    // GoalManager()
+
     public void Start()
     {
         int choice = 0;
@@ -31,7 +31,7 @@ class GoalManager
                 case 3: SaveGoals(); break;
                 case 4: LoadGoals(); break;
                 case 5: RecordEvent(); break;
-                case 6: Console.WriteLine("Well Done, Goodbye!"); break;
+                case 6: Console.WriteLine("Goodbye!"); break;
                 default: Console.WriteLine("Invalid choice, try again."); break;
             }
         }
@@ -44,7 +44,7 @@ class GoalManager
         Console.WriteLine("  2. Eternal Goal");
         Console.WriteLine("  3. Checklist Goal");
         Console.WriteLine("  4. Negative Goal (lose points)");
-        Console.Write("Please select which type of goal you would like to create? ");
+        Console.Write("Which type of goal would you like to create? ");
 
         int type = int.Parse(Console.ReadLine());
 
@@ -78,12 +78,13 @@ class GoalManager
                 return;
         }
 
-        Console.WriteLine("\n===The Goal Has Been Added Successfully!===\n");
+        // ✅ Confirmation message
+        Console.WriteLine("\n--- Goal Added Successfully! ---\n");
     }
 
     private void ListGoalDetails()
     {
-        Console.WriteLine("\nThe goal details are:");
+        Console.WriteLine("\nThe goals are:");
         int i = 1;
         foreach (Goal g in _goals)
         {
@@ -104,13 +105,14 @@ class GoalManager
             _score += pointsEarned;
             Console.WriteLine($"You earned {pointsEarned} points!");
 
-            // Added extract Level
+            // Extra: Level system
             if (_score >= 1000)
             {
-                Console.WriteLine("☑️👍 Congratulations! You have Completed another leveled up! 👍☑️");
-                _score = 0; // Customizable
+                Console.WriteLine("🎉 Congratulations! You leveled up! 🎉");
+                _score = 0; // reset or adjust as you like
             }
 
+            // Extra: Encouraging message
             string[] messages = { "Keep it up!", "You're doing great!", "Stay strong!", "One step closer!" };
             Random rand = new Random();
             Console.WriteLine(messages[rand.Next(messages.Length)]);
@@ -131,7 +133,7 @@ class GoalManager
             }
         }
 
-        Console.WriteLine("Goals saved successfully!");
+        Console.WriteLine("Goals saved successfully.");
     }
 
     private void LoadGoals()
