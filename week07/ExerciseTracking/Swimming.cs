@@ -1,59 +1,43 @@
-public class Swimming : Exercise
+using System;
+
+public class Swimming : Activity
 {
-    public int NumberOfLaps;
+    private int _laps;
 
-    public Swimming(DateTime date, int durationMinutes, int numberOfLaps)
-        : base(date, durationMinutes)
+    public Swimming(string date, int minutes, int laps)
+        : base(date, minutes)
     {
-        NumberOfLaps = numberOfLaps;
+        _laps = laps;
     }
 
-    public override void DisplayDetails()
+    public override double GetDistance()
     {
-        Console.WriteLine($"Swimming on {ActivityDate.ToShortDateString()} for {DurationMinutes} minutes. Laps: {NumberOfLaps}.");
+        // 1 lap = 50 meters → convert to km → then to miles (0.62)
+        double distanceKm = _laps * 50 / 1000.0;
+        double distanceMiles = distanceKm * 0.62;
+        return distanceMiles;
     }
+
+    public override double GetSpeed() => (GetDistance() / GetMinutes()) * 60;
+
+    public override double GetPace() => GetMinutes() / GetDistance();
 }
 
 
 
 
-
-// // Derived class for Swimming
 // public class Swimming : Exercise
 // {
-//     private int _laps;
-//     private string _stroke;
+//     public int NumberOfLaps;
 
-//     public Swimming(string date, TimeSpan duration, int laps, string stroke)
-//         : base(date, duration)
+//     public Swimming(DateTime date, int durationMinutes, int numberOfLaps)
+//         : base(date, durationMinutes)
 //     {
-//         _laps = laps;
-//         _stroke = stroke;
+//         NumberOfLaps = numberOfLaps;
 //     }
 
 //     public override void DisplayDetails()
 //     {
-//         Console.WriteLine($"Swimming on {_date} for {_duration.TotalMinutes:F0} minutes.");
-//         Console.WriteLine($"Laps: {_laps}, Stroke: {_stroke}.");
+//         Console.WriteLine($"Swimming on {ActivityDate.ToShortDateString()} for {DurationMinutes} minutes. Laps: {NumberOfLaps}.");
 //     }
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

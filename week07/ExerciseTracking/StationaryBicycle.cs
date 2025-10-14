@@ -1,18 +1,41 @@
-public class StationaryBicycle : Exercise
+using System;
+
+public class StationaryBicycling : Activity
 {
-    public double CyclingSpeedMPH;
+    private double _speed; // mph
 
-    public StationaryBicycle(DateTime date, int durationMinutes, double cyclingSpeedMPH)
-        : base(date, durationMinutes)
+    public StationaryBicycling(string date, int minutes, double speed)
+        : base(date, minutes)
     {
-        CyclingSpeedMPH = cyclingSpeedMPH;
+        _speed = speed;
     }
 
-    public override void DisplayDetails()
-    {
-        Console.WriteLine($"Stationary Cycling on {ActivityDate.ToShortDateString()} for {DurationMinutes} minutes. Average Speed: {CyclingSpeedMPH} MPH.");
-    }
+    public override double GetDistance() => (_speed * GetMinutes()) / 60;
+
+    public override double GetSpeed() => _speed;
+
+    public override double GetPace() => 60 / _speed;
 }
+
+
+
+
+
+// public class StationaryBicycle : Exercise
+// {
+//     public double CyclingSpeedMPH;
+
+//     public StationaryBicycle(DateTime date, int durationMinutes, double cyclingSpeedMPH)
+//         : base(date, durationMinutes)
+//     {
+//         CyclingSpeedMPH = cyclingSpeedMPH;
+//     }
+
+//     public override void DisplayDetails()
+//     {
+//         Console.WriteLine($"Stationary Cycling on {ActivityDate.ToShortDateString()} for {DurationMinutes} minutes. Average Speed: {CyclingSpeedMPH} MPH.");
+//     }
+// }
 
 
 
