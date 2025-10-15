@@ -5,15 +5,15 @@ class Program
     static void Main(string[] args)
     {
   
-        // Create a list of activities
+        // Creating the list of activities
         List<Activity> activities = new List<Activity>
         {
-            new Running("October 2025", 30, 3.0),
-            new StationaryBicycling("October 2025", 30, 9.7),
-            new Swimming("October 2025", 30, 20)
+            new Running("15 October 2025", 45, 4.0),
+            new StationaryBicycling("15 October 2025", 38, 9.7),
+            new Swimming("15 October 2025", 35, 20)
         };
 
-        // Loop through and display summaries
+        // Looping through the program
         foreach (Activity activity in activities)
         {
             Console.WriteLine(activity.GetSummary());
