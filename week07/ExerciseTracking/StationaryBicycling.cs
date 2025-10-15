@@ -4,7 +4,7 @@ public class StationaryBicycling : Activity
 {
     private double _speed; // mph
 
-    public Cycling(string date, int minutes, double speed)
+    public StationaryBicycling(string date, int minutes, double speed)
         : base(date, minutes)
     {
         _speed = speed;

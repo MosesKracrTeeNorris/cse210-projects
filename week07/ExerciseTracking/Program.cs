@@ -9,7 +9,7 @@ class Program
         List<Activity> activities = new List<Activity>
         {
             new Running("October 2025", 30, 3.0),
-            new Cycling("October 2025", 30, 9.7),
+            new StationaryBicycling("October 2025", 30, 9.7),
             new Swimming("October 2025", 30, 20)
         };
 
