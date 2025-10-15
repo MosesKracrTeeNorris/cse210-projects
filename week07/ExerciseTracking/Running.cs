@@ -14,28 +14,5 @@ public class Running : Activity
 
     public override double GetSpeed() => (_distance / GetMinutes()) * 60;
 
-    public override double GetPace() => GetMinutes() / _distance;
+    public override double GetPace() => GetMinutes() / _distance;
 }
-
-
-
-
-// public class Running : Exercise
-// {
-//     public double DistanceMiles;
-
-//     public Running(DateTime date, int durationMinutes, double distanceMiles)
-//         : base(date, durationMinutes)
-//     {
-//         DistanceMiles = distanceMiles;
-//     }
-
-//     public override void DisplayDetails()
-//     {
-//         Console.WriteLine($"Running on {ActivityDate.ToShortDateString()} for {DurationMinutes} minutes. Distance: {DistanceMiles} miles.");
-//     }
-// }
-
-
-
-

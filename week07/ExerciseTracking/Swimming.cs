@@ -12,7 +12,7 @@ public class Swimming : Activity
 
     public override double GetDistance()
     {
-        // 1 lap = 50 meters → convert to km → then to miles (0.62)
+        
         double distanceKm = _laps * 50 / 1000.0;
         double distanceMiles = distanceKm * 0.62;
         return distanceMiles;
@@ -22,22 +22,3 @@ public class Swimming : Activity
 
     public override double GetPace() => GetMinutes() / GetDistance();
 }
-
-
-
-
-// public class Swimming : Exercise
-// {
-//     public int NumberOfLaps;
-
-//     public Swimming(DateTime date, int durationMinutes, int numberOfLaps)
-//         : base(date, durationMinutes)
-//     {
-//         NumberOfLaps = numberOfLaps;
-//     }
-
-//     public override void DisplayDetails()
-//     {
-//         Console.WriteLine($"Swimming on {ActivityDate.ToShortDateString()} for {DurationMinutes} minutes. Laps: {NumberOfLaps}.");
-//     }
-// }

@@ -28,33 +28,6 @@ public abstract class Activity
         return $"{_date} {GetType().Name} ({_minutes} min): " +
                $"Distance {GetDistance():F2} miles, " +
                $"Speed {GetSpeed():F2} mph, " +
-               $"Pace: {GetPace():F2} min per mile";
-    }
+               $"Pace: {GetPace():F2} min per mile";
+    }
 }
-
-
-
-
-
-// using System;
-// using System.Collections.Generic;
-
-// public abstract class Exercise
-// {
-//     public DateTime ActivityDate;
-//     public int DurationMinutes;
-
-//     public Exercise(DateTime date, int durationMinutes)
-//     {
-//         ActivityDate = date;
-//         DurationMinutes = durationMinutes;
-//     }
-
-//     public abstract void DisplayDetails();
-// }
-
-
-
-
-
-
